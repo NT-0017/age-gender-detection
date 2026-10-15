@@ -53,7 +53,7 @@ The application uses existing trained model files; the deployment does not train
 | Backend API | https://age-gender-detection-hg6n.onrender.com |
 | API health check | https://age-gender-detection-hg6n.onrender.com/health |
 | Interactive API documentation | https://age-gender-detection-hg6n.onrender.com/docs |
-| Frontend demo | [Add the exact Render Static Site URL here](https://age-gender-detection-1-ii33.onrender.com) |
+| Frontend demo |(https://age-gender-detection-1-ii33.onrender.com) |
 
 The backend is hosted on Render. On Render's free web-service plan, the service may spin down after inactivity, so the first request after a period of inactivity can take longer.
 
