@@ -1,0 +1,101 @@
+﻿# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Age & Gender Detection — .gitignore
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# ── Trained model weights (≈26 MB each) ───────────────────────────────────
+# Keep locally; decide on Git LFS or external storage before first push.
+age_model.h5
+gender_model.h5
+
+# ── Python virtual environment ─────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── Python bytecode & caches ───────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# ── Environment / secrets ──────────────────────────────────────────────────
+.env
+.env.*
+*.env
+
+# ── Personal test images ───────────────────────────────────────────────────
+# Common image formats that a user might drop in the project root while testing
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.webp
+# Exclude the rule above only for explicitly tracked assets (none at present).
+# If you later add images that SHOULD be committed, force-add them:
+#   git add -f path/to/image.jpg
+
+# ── Jupyter / IPython ─────────────────────────────────────────────────────
+# Keep the notebook itself; only ignore auto-generated artefacts.
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ── Distribution / packaging ───────────────────────────────────────────────
+dist/
+build/
+*.egg-info/
+*.egg
+MANIFEST
+wheels/
+pip-wheel-metadata/
+
+# ── Testing & coverage ─────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+*.coveragerc
+
+# ── Type-checking ──────────────────────────────────────────────────────────
+.mypy_cache/
+.dmypy.json
+.pyright/
+
+# ── OS-generated files ─────────────────────────────────────────────────────
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*~
+
+# ── Editor / IDE ───────────────────────────────────────────────────────────
+# VS Code
+.vscode/
+
+# JetBrains (PyCharm, etc.)
+.idea/
+*.iml
+
+# Vim / Emacs
+*.swp
+*.swo
+*.bak
+*.orig
+[#]*[#]
+.\#*
+
+# ── Logs & temporary files ─────────────────────────────────────────────────
+*.log
+*.tmp
+*.temp

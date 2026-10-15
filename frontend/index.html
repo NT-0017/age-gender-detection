@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Age &amp; Gender Detection</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Header ───────────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <svg class="header-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <circle cx="24" cy="20" r="9" stroke="url(#hg)" stroke-width="2.5"/>
+        <path d="M7 43c0-9.389 7.611-17 17-17s17 7.611 17 17"
+              stroke="url(#hg)" stroke-width="2.5" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="hg" x1="7" y1="7" x2="41" y2="41" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#818cf8"/>
+            <stop offset="1" stop-color="#a78bfa"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="header-text">
+        <h1>Age &amp; Gender Detection</h1>
+        <p>Upload a photo &mdash; detect faces &mdash; get instant AI predictions</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Main layout ──────────────────────────────────────────────────────── -->
+  <main class="main-layout">
+
+    <!-- LEFT: upload + preview -->
+    <section class="panel upload-panel" aria-label="Image upload">
+      <h2 class="panel-title">Upload Image</h2>
+
+      <!-- Drop zone -->
+      <div class="drop-zone" id="dropZone" role="button" tabindex="0"
+           aria-label="Drop an image here or click to browse">
+        <svg class="drop-icon" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <rect x="8" y="12" width="48" height="40" rx="6"
+                stroke="currentColor" stroke-width="2.2" stroke-dasharray="6 4"/>
+          <path d="M23 37l9-9 9 9" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="32" y1="28" x2="32" y2="47" stroke="currentColor"
+                stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <p class="drop-title">Drop an image here</p>
+        <p class="drop-sub">or <button class="link-btn" id="browseBtn" type="button">click to browse</button></p>
+        <p class="drop-formats">JPG &middot; PNG &middot; BMP &middot; WebP &nbsp;&bull;&nbsp; max&nbsp;10&nbsp;MB</p>
+        <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.bmp,.webp" aria-hidden="true" />
+      </div>
+
+      <!-- Preview (shown after file is selected) -->
+      <div class="preview-block hidden" id="previewBlock">
+        <div class="preview-topbar">
+          <span class="preview-name" id="previewName" title=""></span>
+          <button class="btn-clear" id="clearBtn" type="button" title="Remove image" aria-label="Remove image">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13" aria-hidden="true">
+              <path fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0
+                   111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414
+                   1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586
+                   10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+            Clear
+          </button>
+        </div>
+
+        <!-- Canvas: image + bounding-box overlay -->
+        <div class="canvas-wrap">
+          <canvas id="previewCanvas" aria-label="Image preview with face detections"></canvas>
+        </div>
+
+        <button class="btn-detect" id="detectBtn" type="button" disabled>
+          <svg class="detect-icon" viewBox="0 0 24 24" fill="none"
+               width="17" height="17" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+            <path d="M17 17l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span id="detectLabel">Detect Age &amp; Gender</span>
+          <div class="btn-spinner hidden" id="btnSpinner" aria-hidden="true"></div>
+        </button>
+      </div>
+    </section>
+
+    <!-- RIGHT: results -->
+    <section class="panel results-panel" id="resultsPanel"
+             aria-label="Detection results" aria-live="polite">
+      <h2 class="panel-title">Results</h2>
+
+      <div class="results-placeholder" id="resultsPlaceholder">
+        <svg viewBox="0 0 64 64" fill="none" width="52" height="52" aria-hidden="true">
+          <circle cx="32" cy="26" r="10" stroke="currentColor" stroke-width="2.2"/>
+          <path d="M14 54c0-9.389 7.611-17 18-17s18 7.611 18 17"
+                stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <p>Results will appear here<br>after detection</p>
+      </div>
+
+      <div class="results-list hidden" id="resultsList"></div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Powered by <strong>FastAPI</strong> &middot; <strong>TensorFlow</strong> &middot; <strong>OpenCV</strong></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

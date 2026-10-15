@@ -1,0 +1,8 @@
+# Python 3.12 — versions chosen to load Keras 3 HDF5 Sequential models
+# saved from the existing Colab notebook (compile=False).
+tensorflow==2.17.1
+opencv-python==4.10.0.84
+numpy==1.26.4
+fastapi==0.115.8
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
