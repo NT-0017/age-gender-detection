@@ -4,7 +4,7 @@ A web-based computer vision application that detects faces in an uploaded image 
 
 **Author:** Nived Tabib  
 **GitHub Repository:** https://github.com/NT-0017/age-gender-detection  
-**Live API:** https://age-gender-detection-hg6n.onrender.com  
+**Live API:** https://age-gender-detection-hg6n.onrender.com/health
 **API Documentation:** https://age-gender-detection-hg6n.onrender.com/docs  
 **Frontend Demo:** https://age-gender-detection-1-ii33.onrender.com
 
