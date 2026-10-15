@@ -3,9 +3,9 @@
 A web-based computer vision application that detects faces in an uploaded image and predicts each detected face's **estimated age** and **gender**. The project combines trained CNN models with OpenCV face detection, a FastAPI backend, and a lightweight HTML/CSS/JavaScript frontend.
 
 **Author:** Nived Tabib  
-**GitHub Repository:** https://github.com/NT-0017/age-gender-detection  
+**GitHub Repository:** https://github.com/NT-0017/age-gender-detection
 **Live API:** https://age-gender-detection-hg6n.onrender.com/health
-**API Documentation:** https://age-gender-detection-hg6n.onrender.com/docs  
+**API Documentation:** https://age-gender-detection-hg6n.onrender.com/docs
 **Frontend Demo:** https://age-gender-detection-1-ii33.onrender.com
 
 > **Note:** The API and its prediction endpoint have been deployed and tested successfully. Replace the frontend placeholder above with the exact `.onrender.com` URL shown on your Render Static Site dashboard.
