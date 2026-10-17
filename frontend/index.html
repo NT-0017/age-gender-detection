@@ -86,6 +86,36 @@
       </div>
     </section>
 
+    
+    <!-- WEBCAM: live preview + capture -->
+    <section class="panel webcam-panel" aria-label="Webcam detection">
+      <h2 class="panel-title">Live Webcam Detection</h2>
+
+      <div class="webcam-preview">
+        <video id="webcamVideo" autoplay playsinline muted></video>
+        <canvas id="webcamCanvas" class="hidden"></canvas>
+      </div>
+
+      <p class="webcam-status" id="webcamStatus">
+        Start your webcam to capture a photo for age and gender prediction.
+      </p>
+
+      <div class="webcam-controls">
+        <button class="btn-detect" id="startWebcamBtn" type="button">
+          Start Webcam
+        </button>
+
+        <button class="btn-detect" id="captureWebcamBtn" type="button" disabled>
+          Capture &amp; Detect
+        </button>
+
+        <button class="btn-clear" id="stopWebcamBtn" type="button" disabled>
+          Stop Webcam
+        </button>
+      </div>
+    </section>
+
+
     <!-- RIGHT: results -->
     <section class="panel results-panel" id="resultsPanel"
              aria-label="Detection results" aria-live="polite">

@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 /* ── Config ──────────────────────────────────────────────────────────────── */
-const API_DETECT     = 'http://127.0.0.1:8000/api/detect';
+const API_DETECT = 'https://age-gender-detection-hg6n.onrender.com/api/detect';
 const MAX_BYTES      = 10 * 1024 * 1024;          // 10 MB (matches backend)
 const MAX_CANVAS_PX  = 1600;                       // cap canvas resolution for performance
 const ACCEPTED_TYPES = new Set([
@@ -28,6 +28,16 @@ const btnSpinner        = document.getElementById('btnSpinner');
 const detectIcon        = detectBtn.querySelector('.detect-icon');
 const resultsPlaceholder = document.getElementById('resultsPlaceholder');
 const resultsList       = document.getElementById('resultsList');
+// Webcam elements
+const webcamVideo = document.getElementById('webcamVideo');
+const webcamCanvas = document.getElementById('webcamCanvas');
+const webcamStatus = document.getElementById('webcamStatus');
+
+const startWebcamBtn = document.getElementById('startWebcamBtn');
+const captureWebcamBtn = document.getElementById('captureWebcamBtn');
+const stopWebcamBtn = document.getElementById('stopWebcamBtn');
+
+let webcamStream = null;
 
 /* ── State ───────────────────────────────────────────────────────────────── */
 let currentFile  = null;   // File selected by the user
@@ -341,3 +351,85 @@ function showMessage(type, text) {
   });
   resultsList.appendChild(msg);
 }
+
+
+startWebcamBtn.addEventListener('click', async () => {
+  try {
+    webcamStatus.textContent = 'Requesting camera permission...';
+
+    webcamStream = await navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: false
+    });
+
+    webcamVideo.srcObject = webcamStream;
+
+    startWebcamBtn.disabled = true;
+    captureWebcamBtn.disabled = false;
+    stopWebcamBtn.disabled = false;
+
+    webcamStatus.textContent = 'Webcam is running. Capture a photo to detect age and gender.';
+  } catch (error) {
+    console.error('Webcam error:', error);
+    webcamStatus.textContent =
+      'Unable to access webcam. Please allow camera permission and try again.';
+  }
+});
+
+stopWebcamBtn.addEventListener('click', () => {
+  if (webcamStream) {
+    webcamStream.getTracks().forEach(track => track.stop());
+    webcamStream = null;
+  }
+
+  webcamVideo.srcObject = null;
+
+  startWebcamBtn.disabled = false;
+  captureWebcamBtn.disabled = true;
+  stopWebcamBtn.disabled = true;
+
+  webcamStatus.textContent = 'Webcam stopped.';
+});
+
+
+captureWebcamBtn.addEventListener('click', async () => {
+  if (!webcamStream || !webcamVideo.videoWidth) {
+    webcamStatus.textContent = 'Please start the webcam first.';
+    return;
+  }
+
+  webcamCanvas.width = webcamVideo.videoWidth;
+  webcamCanvas.height = webcamVideo.videoHeight;
+
+  const context = webcamCanvas.getContext('2d');
+  context.drawImage(
+    webcamVideo,
+    0,
+    0,
+    webcamCanvas.width,
+    webcamCanvas.height
+  );
+
+  webcamStatus.textContent = 'Capturing photo...';
+
+  webcamCanvas.toBlob(async (blob) => {
+    if (!blob) {
+      webcamStatus.textContent = 'Could not capture the photo. Try again.';
+      return;
+    }
+
+    const file = new File([blob], 'webcam_photo.jpg', {
+      type: 'image/jpeg'
+    });
+
+    // Reuse the existing image-upload workflow
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(file);
+
+    fileInput.files = dataTransfer.files;
+    fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+
+    webcamStatus.textContent =
+      'Photo captured. Click Detect Age & Gender to run prediction.';
+  }, 'image/jpeg', 0.95);
+});
